@@ -7,7 +7,7 @@ use Ramsey\Uuid\Uuid;
 
 trait HasUuid
 {
-    static protected function bootHasUuid(): void
+    protected static function bootHasUuid(): void
     {
         static::creating(fn (Model $model) => $model->setAttribute('uuid', (string) Uuid::uuid4()));
     }
