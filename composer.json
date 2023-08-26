@@ -60,7 +60,7 @@
             "@php artisan insights --no-interaction"
         ],
         "style:fix": [
-            "@php artisan pint"
+            "@php ./vendor/bin/pint --dirty"
         ]
     },
     "extra": {
