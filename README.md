@@ -1,9 +1,16 @@
 ## Petshop Coding Test
 
+## Commands
+
 ### Resetting the application
 The command artisan `app:reset` will restart your application when executed. This command is set to run every midnight UTC. If you are running it locally, you can add the following code to your crontab.
 ```
 * * * * * {path to php}/php {path to application}/artisan schedule:run >> /dev/null 2>&1
+```
+
+### Generate Swagger Doc
+```
+artisan swagger:generate
 ```
 
 ### Composer console commands

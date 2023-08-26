@@ -1,0 +1,28 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pet Shop API - Swagger Documentation",
+        "contact": {
+            "name": "Leonardo Carmo",
+            "email": "ldiascarmo@gmail.com"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https://petshop.test/"
+        }
+    ],
+    "paths": {
+        "/api/v1/info": {
+            "get": {
+                "operationId": "846f965e07f1ecfe392d39c87fc64f17",
+                "responses": {
+                    "200": {
+                        "description": "Return the basic info of the api."
+                    }
+                }
+            }
+        }
+    }
+}
