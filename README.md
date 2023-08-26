@@ -13,8 +13,13 @@ Run insights with [PHP Insights](https://github.com/nunomaduro/phpinsights)
 ```shell
 composer analyse:insights
 ```
+Run style fixer [Laravel PINT](https://github.com/laravel/pint)
+```shell
+composer style:fix
+```
 
 ### Packages
 - [PEST](https://github.com/pestphp/pest)
 - [Larastan](https://github.com/nunomaduro/larastan)
 - [PHP Insights](https://github.com/nunomaduro/phpinsights)
+- [Laravel PINT](https://github.com/laravel/pint)
