@@ -29,3 +29,6 @@ composer style:fix
 - [Larastan](https://github.com/nunomaduro/larastan)
 - [PHP Insights](https://github.com/nunomaduro/phpinsights)
 - [Laravel PINT](https://github.com/laravel/pint)
+- [Swagger PHP](https://github.com/zircote/swagger-php)
+- [Swagger UI](https://github.com/swagger-api/swagger-ui)
+- [Laravel Data](https://github.com/spatie/laravel-data)
