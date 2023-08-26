@@ -13,8 +13,10 @@
 
 uses(
     Tests\TestCase::class,
-    // Illuminate\Foundation\Testing\RefreshDatabase::class,
-)->in('Feature');
+    Illuminate\Foundation\Testing\RefreshDatabase::class,
+)
+    ->beforeEach(fn () => $this->seed(\Database\Seeders\DatabaseSeeder::class))
+    ->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
