@@ -59,7 +59,7 @@
             "@php ./vendor/bin/phpstan analyse"
         ],
         "analyse:insights": [
-            "@php artisan insights --no-interaction"
+            "@php artisan insights --n -s"
         ],
         "style:fix": [
             "@php ./vendor/bin/pint --dirty"

@@ -20,7 +20,8 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array<string> $fillable
+     * @inheritdoc
      */
     protected $fillable = [
         'name',
@@ -31,7 +32,8 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var array<string> $hidden
+     * @inheritdoc
      */
     protected $hidden = [
         'password',
@@ -41,7 +43,8 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @var array<string, string> $casts
+     * @inheritdoc
      */
     protected $casts = [
         'email_verified_at' => 'datetime',

@@ -10,6 +10,7 @@ class ResetApplication extends Command
      * The name and signature of the console command.
      *
      * @var string
+     * @inheritdoc
      */
     protected $signature = 'app:reset';
 
@@ -17,6 +18,7 @@ class ResetApplication extends Command
      * The console command description.
      *
      * @var string
+     * @inheritdoc
      */
     protected $description = 'Reset the application every night at 00:00.';
 

@@ -23,10 +23,10 @@ return [
         \PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer::class,
         \SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff::class,
 
-// Architecture
+        // Architecture
         \NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses::class,
 
-// Style
+        // Style
         \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterCastSniff::class,
         \PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff::class,
         \SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff::class,
