@@ -10,7 +10,6 @@ class ApiInfoResource extends Data
         public readonly string $app_name,
         public readonly string $api_version,
         public readonly string $api_env,
-    )
-    {
+    ) {
     }
 }

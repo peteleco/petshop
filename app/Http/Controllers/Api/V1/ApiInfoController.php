@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use OpenApi\Attributes as OA;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\V1\ApiInfoResource;
-use Illuminate\Http\JsonResponse;
 
 #[OA\Info(version: 'v1', title: 'Pet Shop API - Swagger Documentation')]
 #[OA\Server(url: 'https://petshop.test/')]

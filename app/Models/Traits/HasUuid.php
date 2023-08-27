@@ -2,8 +2,8 @@
 
 namespace App\Models\Traits;
 
-use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Database\Eloquent\Model;
 
 trait HasUuid
 {
