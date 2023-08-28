@@ -3,10 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Traits\HasUuid;
-use Illuminate\Notifications\Notifiable;
+use App\Builders\UserBuilder;
+use App\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @property string $uuid
@@ -51,6 +52,14 @@ class User extends Authenticatable
         'last_login_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * @return \App\Builders\UserBuilder<\App\Models\User>
+     */
+    public function newEloquentBuilder($query): UserBuilder
+    {
+        return new UserBuilder($query);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\JwtToken>
