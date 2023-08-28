@@ -132,6 +132,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'secret' => env('JWT_SECRET'),
+
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
