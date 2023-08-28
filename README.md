@@ -39,3 +39,4 @@ composer style:fix
 - [Swagger PHP](https://github.com/zircote/swagger-php)
 - [Swagger UI](https://github.com/swagger-api/swagger-ui)
 - [Laravel Data](https://github.com/spatie/laravel-data)
+- [JSON Web Token](https://github.com/lcobucci/jwt)
