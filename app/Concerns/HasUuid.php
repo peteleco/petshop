@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models\Traits;
+namespace App\Concerns;
 
-use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Uuid;
 
 trait HasUuid
 {
