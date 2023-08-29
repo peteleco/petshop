@@ -51,6 +51,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'last_login_at' => 'datetime',
         'password' => 'hashed',
+        'is_admin' => 'boolean',
+        'is_marketing' => 'boolean'
     ];
 
     public function getAuthIdentifierName(): string
@@ -72,5 +74,10 @@ class User extends Authenticatable
     public function jwtTokens(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(JwtToken::class, 'user_id', 'id');
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->getAttribute('is_admin');
     }
 }
