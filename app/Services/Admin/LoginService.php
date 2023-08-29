@@ -57,7 +57,7 @@ class LoginService
 
     private function getAuthToken(): UnencryptedToken
     {
-        return \Auth::getToken();
+        return \Auth::token();
     }
 
     /**
