@@ -19,7 +19,6 @@ Route::post('admin/login', \App\Http\Controllers\Api\V1\Admin\LoginController::c
 
 // Routes that must be authenticated
 Route::group([
-    'middleware' => 'auth:api' // 'auth' => \App\Http\Middleware\Authenticate::class,
-], function () {
-
+    'middleware' => 'auth:api', // 'auth' => \App\Http\Middleware\Authenticate::class,
+], function (): void {
 });

@@ -2,10 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Http\Request;
 use App\Http\Resources\Api\V1\ErrorResource;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class Handler extends ExceptionHandler
@@ -40,15 +40,15 @@ class Handler extends ExceptionHandler
                     return ErrorResource::from([
                         'error' => $exception->getMessage(),
                         'errors' => $exception->errors(),
-                        'trace' => $this->app->hasDebugModeEnabled()? $exception->getTrace() : []
+                        'trace' => $this->app->hasDebugModeEnabled() ? $exception->getTrace() : [],
                     ])->toResponse($request)
                         ->setStatusCode($exception->status);
                 }
                 /** @var HttpExceptionInterface $exception */
-                if($this->isHttpException($exception)) {
+                if ($this->isHttpException($exception)) {
                     return ErrorResource::from([
                         'error' => $exception->getMessage(),
-                        'trace' => $this->app->hasDebugModeEnabled()? $exception->getTrace() : []
+                        'trace' => $this->app->hasDebugModeEnabled() ? $exception->getTrace() : [],
                     ])->toResponse($request)
                         ->setStatusCode($exception->getStatusCode());
                 }

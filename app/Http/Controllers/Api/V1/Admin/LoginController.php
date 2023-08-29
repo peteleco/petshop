@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Admin\LoginRequest;
-use App\Http\Resources\Api\V1\SuccessResource;
-use App\Services\Admin\LoginService;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
+use App\Http\Controllers\Controller;
+use App\Services\Admin\LoginService;
+use App\Http\Resources\Api\V1\SuccessResource;
+use App\Http\Requests\Api\V1\Admin\LoginRequest;
 
 class LoginController extends Controller
 {

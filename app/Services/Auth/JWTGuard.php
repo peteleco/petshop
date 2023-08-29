@@ -2,12 +2,12 @@
 
 namespace App\Services\Auth;
 
+use Illuminate\Http\Request;
 use Illuminate\Auth\GuardHelpers;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Lcobucci\JWT\UnencryptedToken;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\UserProvider;
-use Illuminate\Http\Request;
-use Lcobucci\JWT\UnencryptedToken;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class JWTGuard implements Guard
@@ -29,6 +29,10 @@ class JWTGuard implements Guard
         $this->jwt = $jwt;
     }
 
+    /**
+     * @inheritdoc
+     * @return \Illuminate\Contracts\Auth\Authenticatable|void|null
+     */
     public function user()
     {
         // Look Token Guard
@@ -36,7 +40,12 @@ class JWTGuard implements Guard
             return $this->user;
         }
         /*
-
+        if ($this->jwt->setRequest($this->request)->getToken() &&
+            ($payload = $this->jwt->check(true)) &&
+            $this->validateSubject()
+        ) {
+            return $this->user = $this->provider->retrieveById($payload['sub']);
+        }
          */
     }
 
@@ -71,9 +80,7 @@ class JWTGuard implements Guard
     }
 
     /**
-     * @param \Illuminate\Contracts\Auth\Authenticatable $lastAttempted
      *
-     * @return JWTGuard
      */
     public function setLastAttempted(Authenticatable $lastAttempted): JWTGuard
     {
@@ -90,7 +97,6 @@ class JWTGuard implements Guard
     }
 
     /**
-     * @return \Lcobucci\JWT\UnencryptedToken
      */
     public function getToken(): UnencryptedToken
     {

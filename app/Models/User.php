@@ -3,11 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Builders\UserBuilder;
 use App\Concerns\HasUuid;
+use App\Builders\UserBuilder;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 /**
  * @property string $uuid
@@ -52,7 +52,7 @@ class User extends Authenticatable
         'last_login_at' => 'datetime',
         'password' => 'hashed',
         'is_admin' => 'boolean',
-        'is_marketing' => 'boolean'
+        'is_marketing' => 'boolean',
     ];
 
     public function getAuthIdentifierName(): string

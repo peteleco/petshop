@@ -2,8 +2,8 @@
 
 namespace App\Actions\Auth;
 
-use App\Models\JwtToken;
 use App\Models\User;
+use App\Models\JwtToken;
 use Lcobucci\JWT\UnencryptedToken;
 
 class StoreTokenAction

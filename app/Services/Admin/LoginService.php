@@ -2,14 +2,14 @@
 
 namespace App\Services\Admin;
 
+use App\Models\User;
+use App\Models\JwtToken;
+use Illuminate\Support\Facades\DB;
+use Lcobucci\JWT\UnencryptedToken;
 use App\Actions\Auth\StoreTokenAction;
 use App\Actions\Auth\UpdateLastLoginAction;
 use App\Http\Requests\Api\V1\Admin\LoginRequest;
 use App\Http\Resources\Api\V1\Auth\LoginResource;
-use App\Models\JwtToken;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Lcobucci\JWT\UnencryptedToken;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 readonly class LoginService

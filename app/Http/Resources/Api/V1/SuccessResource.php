@@ -3,8 +3,8 @@
 namespace App\Http\Resources\Api\V1;
 
 use Illuminate\Http\Request;
-use Spatie\LaravelData\Contracts\DataObject;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Contracts\DataObject;
 use Symfony\Component\HttpFoundation\Response;
 
 class SuccessResource extends Data
@@ -21,7 +21,7 @@ class SuccessResource extends Data
     public static function ok(DataObject $data, Request $request): \Illuminate\Http\JsonResponse|Response
     {
         return static::from([
-            'data' => $data
+            'data' => $data,
         ])->toResponse($request)->setStatusCode(Response::HTTP_OK);
     }
 }
