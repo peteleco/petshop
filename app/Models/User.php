@@ -53,6 +53,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function getAuthIdentifierName(): string
+    {
+        return 'uuid';
+    }
+
     /**
      * @return \App\Builders\UserBuilder<\App\Models\User>
      */
