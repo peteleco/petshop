@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use App\Services\Auth\JWT;
+use Illuminate\Support\Facades\Auth;
+use App\Services\Auth\JWTGuard;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,6 +23,16 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Auth::extend('jwt', function ($app, $name, array $config) {
+            return new JWTGuard(
+                Auth::createUserProvider($config['provider']),
+                $app->make('request'),
+                new JWT(
+                    config('jwt.private'),
+                    config('jwt.public'),
+                    config('jwt.passphrase'),
+                )
+            );
+        });
     }
 }
