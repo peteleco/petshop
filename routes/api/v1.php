@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('info', \App\Http\Controllers\Api\V1\ApiInfoController::class)->name('api.info');
+Route::get('info', \App\Http\Controllers\Api\V1\ApiInfoController::class)->name('api.v1.info');
