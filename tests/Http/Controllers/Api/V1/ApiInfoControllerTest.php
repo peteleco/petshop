@@ -3,7 +3,7 @@
 use function Pest\Laravel\{getJson};
 
 it('request api/v1/info', function () {
-    $response = getJson(route('api.info'));
+    $response = getJson(route('api.v1.info'));
     $response->assertStatus(200);
     $response->assertJsonFragment(\App\Http\Resources\Api\V1\ApiInfoResource::from([
         'api_env' => 'testing',
