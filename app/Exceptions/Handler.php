@@ -21,8 +21,10 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    public function __construct(Container $container, protected readonly \Illuminate\Contracts\Foundation\Application $app)
-    {
+    public function __construct(
+        Container $container,
+        protected readonly \Illuminate\Contracts\Foundation\Application $app
+    ) {
         parent::__construct($container);
     }
 

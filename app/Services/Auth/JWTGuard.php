@@ -10,7 +10,7 @@ use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
-class JWTGuard implements Guard
+class JWTGuard implements Guard, \App\Contracts\Services\Auth\JWTGuard
 {
     use GuardHelpers;
 
@@ -27,6 +27,7 @@ class JWTGuard implements Guard
         $this->provider = $provider;
         $this->user = null;
         $this->jwt = $jwt;
+        $this->request = $request;
     }
 
     /**
@@ -61,17 +62,14 @@ class JWTGuard implements Guard
             UnprocessableEntityHttpException::class,
             __('Failed to authenticate user.')
         );
-        $this->setLastAttempted($user);
+        $this->lastAttempted = $user;
         throw_if(
             ! $this->hasValidCredentials($user, $credentials),
             UnprocessableEntityHttpException::class,
             __('Failed to authenticate user.')
         );
-
-        $token = $this->jwt->issueToken($user->getAuthIdentifier());
-
-        $this->setToken($token)
-            ->setUser($user);
+        $this->setUser($user);
+        $this->token = $this->jwt->issueToken($user->getAuthIdentifier());
         return true;
     }
 
@@ -83,26 +81,12 @@ class JWTGuard implements Guard
         return $this->provider->validateCredentials($user, $credentials);
     }
 
-    /**
-     *
-     */
-    public function setLastAttempted(Authenticatable $lastAttempted): JWTGuard
+    public function lastAttempted(): Authenticatable
     {
-        $this->lastAttempted = $lastAttempted;
-
-        return $this;
+        return $this->lastAttempted;
     }
 
-    public function setToken(UnencryptedToken $token): static
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
-    /**
-     */
-    public function getToken(): UnencryptedToken
+    public function token(): UnencryptedToken
     {
         return $this->token;
     }
