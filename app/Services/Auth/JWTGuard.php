@@ -50,6 +50,7 @@ class JWTGuard implements Guard
     }
 
     /**
+     * @param array{'email':string,'password':string} $credentials
      * @throws \Throwable
      */
     public function validate(array $credentials = []): bool
@@ -74,6 +75,9 @@ class JWTGuard implements Guard
         return true;
     }
 
+    /**
+     * @param array{'email':string,'password':string} $credentials
+     */
     protected function hasValidCredentials(Authenticatable $user, array $credentials): bool
     {
         return $this->provider->validateCredentials($user, $credentials);

@@ -16,7 +16,7 @@ uses(
     Illuminate\Foundation\Testing\RefreshDatabase::class,
 )
     ->beforeEach(fn () => $this->seed(\Database\Seeders\DatabaseSeeder::class))
-    ->in('Feature','Http');
+    ->in('Feature', 'Http');
 
 /*
 |--------------------------------------------------------------------------

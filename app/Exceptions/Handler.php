@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Resources\Api\V1\ErrorResource;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class Handler extends ExceptionHandler
 {
@@ -32,10 +31,9 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->renderable(function (\Exception $exception, Request $request) {
+        $this->renderable(function (\Throwable $exception, Request $request) {
             // Format JSON Response
             if ($request->is('api/*')) {
-                /** @var \Illuminate\Validation\ValidationException $exception */
                 if ($exception instanceof \Illuminate\Validation\ValidationException) {
                     return ErrorResource::from([
                         'error' => $exception->getMessage(),
@@ -44,7 +42,7 @@ class Handler extends ExceptionHandler
                     ])->toResponse($request)
                         ->setStatusCode($exception->status);
                 }
-                /** @var HttpExceptionInterface $exception */
+
                 if ($this->isHttpException($exception)) {
                     return ErrorResource::from([
                         'error' => $exception->getMessage(),

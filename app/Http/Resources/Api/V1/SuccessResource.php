@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SuccessResource extends Data
 {
+    /**
+     * @param array<Type> $errors
+     * @param array<Type> $trace
+     */
     public function __construct(
         public readonly DataObject $data,
         public readonly int $success = 1,

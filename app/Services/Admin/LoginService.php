@@ -12,7 +12,7 @@ use App\Http\Requests\Api\V1\Admin\LoginRequest;
 use App\Http\Resources\Api\V1\Auth\LoginResource;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
-readonly class LoginService
+class LoginService
 {
     public function __construct(
         public UpdateLastLoginAction $updateLastLoginAction,

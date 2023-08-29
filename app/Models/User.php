@@ -63,7 +63,7 @@ class User extends Authenticatable
     /**
      * @return \App\Builders\UserBuilder<\App\Models\User>
      */
-    public function newEloquentBuilder($query): UserBuilder
+    public function newEloquentBuilder(\Illuminate\Contracts\Database\Query\Builder $query): UserBuilder
     {
         return new UserBuilder($query);
     }
