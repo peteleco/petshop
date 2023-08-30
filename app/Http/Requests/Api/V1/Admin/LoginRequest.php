@@ -16,15 +16,9 @@ use Spatie\LaravelData\Attributes\Validation\Required;
                 required: ['email', 'password'],
                 properties: [
                     new OA\Property(property: 'email', title: 'Email', description: 'User email', type: 'string', default: 'admin@buckhill.co.uk'),
-                    new OA\Property(property: 'password', title: 'Password', description: 'User password', type: 'string', default: 'admin')
+                    new OA\Property(property: 'password', title: 'Password', description: 'User password', type: 'string', default: 'admin'),
                 ]
             )
-        ),
-        new OA\JsonContent(
-            properties: [
-                new OA\Property(property: 'email', title: 'Email', type: 'string'),
-                new OA\Property(property: 'password', title: 'Password', type: 'string')
-            ]
         )
     ]
 )]

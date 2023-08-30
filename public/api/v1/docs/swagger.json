@@ -81,21 +81,6 @@
                             },
                             "type": "object"
                         }
-                    },
-                    "application/json": {
-                        "schema": {
-                            "properties": {
-                                "email": {
-                                    "title": "Email",
-                                    "type": "string"
-                                },
-                                "password": {
-                                    "title": "Password",
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
                     }
                 }
             }
