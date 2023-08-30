@@ -27,11 +27,14 @@ class LoginService
     {
         $token = DB::transaction(function () use ($data) {
             $this->validate($data);
-            $this->validateAdmin($admin = $this->user());
+            $admin = $this->user();
+            $this->validateAdmin($admin);
             $this->updateLastLogin($admin);
             $this->storeTokenAction($admin, new JwtToken(), $token = $this->getAuthToken());
+
             return $token->toString();
         });
+
         return LoginResource::from(['token' => $token]);
     }
 
@@ -40,9 +43,19 @@ class LoginService
         \Auth::validate($data->toArray());
     }
 
+    /**
+     * @throws \Throwable
+     */
     private function user(): User
     {
-        return \Auth::user();
+        /** @var ?User $user */
+        $user = \Auth::user();
+        throw_if(
+            ! $user,
+            UnauthorizedHttpException::class,
+            __('Unauthorized. Please provide valid credentials or log in to access this resource.')
+        );
+        return $user;
     }
 
     private function updateLastLogin(\App\Models\User $admin): void

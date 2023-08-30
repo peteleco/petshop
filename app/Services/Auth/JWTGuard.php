@@ -51,10 +51,11 @@ class JWTGuard implements Guard, \App\Contracts\Services\Auth\JWTGuard
     }
 
     /**
-     * @param array{'email':string,'password':string} $credentials
+     * @param array{"email":string, "password":string} $credentials
+     * @inheritdoc
      * @throws \Throwable
      */
-    public function validate(array $credentials = []): bool
+    public function validate(array $credentials = ['email' => '', 'password' => '']): bool
     {
         $user = $this->provider->retrieveByCredentials($credentials);
         throw_if(
@@ -74,10 +75,12 @@ class JWTGuard implements Guard, \App\Contracts\Services\Auth\JWTGuard
     }
 
     /**
-     * @param array{'email':string,'password':string} $credentials
+     * @param array{"email":string, "password":string} $credentials
      */
-    protected function hasValidCredentials(Authenticatable $user, array $credentials): bool
-    {
+    protected function hasValidCredentials(
+        Authenticatable $user,
+        array $credentials = ['email' => '', 'password' => '']
+    ): bool {
         return $this->provider->validateCredentials($user, $credentials);
     }
 

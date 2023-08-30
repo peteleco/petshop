@@ -2,7 +2,6 @@
 
 namespace App\Builders;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -22,12 +21,18 @@ class UserBuilder extends Builder
         return $this->where('is_admin', true);
     }
 
-    public function findByEmail(string $email): User|null
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection<array-key,\App\Models\User>
+     */
+    public function findByEmail(string $email): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->filterByEmail($email)->get()->first();
+        return $this->filterByEmail($email)->get();
     }
-    public function findAdminByEmail(string $email): User|null
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection<array-key,\App\Models\User>
+     */
+    public function findAdminByEmail(string $email): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->filterByAdmin()->filterByEmail($email)->get()->first();
+        return $this->filterByAdmin()->filterByEmail($email)->get();
     }
 }

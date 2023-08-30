@@ -3,7 +3,6 @@
 namespace App\Services\Auth;
 
 use DateTimeImmutable;
-use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Key\InMemory;
 
@@ -11,6 +10,10 @@ class JWT
 {
     private Configuration $config;
 
+    /**
+     * @param non-empty-string $privateKey
+     * @param non-empty-string $publicKey
+     */
     public function __construct(string $privateKey, string $publicKey, string $passphrase)
     {
         $this->config = Configuration::forAsymmetricSigner(
@@ -20,7 +23,7 @@ class JWT
         );
     }
 
-    public function issueToken(string $uuid): Token
+    public function issueToken(string $uuid): \Lcobucci\JWT\UnencryptedToken
     {
         $issuedAt = new DateTimeImmutable();
         return $this->config->builder()

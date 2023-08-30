@@ -33,7 +33,6 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<string> $hidden
      * @inheritdoc
      */
     protected $hidden = [
@@ -61,7 +60,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @param \Illuminate\Database\Query\Builder $query
+     * @inheritdoc
      * @return \App\Builders\UserBuilder<\App\Models\User>
      */
     public function newEloquentBuilder($query): UserBuilder

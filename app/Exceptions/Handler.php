@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\Api\V1\ErrorResource;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class Handler extends ExceptionHandler
 {
@@ -38,17 +39,18 @@ class Handler extends ExceptionHandler
             if ($request->is('api/*')) {
                 if ($exception instanceof \Illuminate\Validation\ValidationException) {
                     return ErrorResource::from([
+
                         'error' => $exception->getMessage(),
-                        'errors' => $exception->errors(),
-                        'trace' => $this->app->hasDebugModeEnabled() ? $exception->getTrace() : [],
+                        'errors' => $exception,
+                        'exception' => $this->app->hasDebugModeEnabled() ? $exception : null,
                     ])->toResponse($request)
                         ->setStatusCode($exception->status);
                 }
 
-                if ($this->isHttpException($exception)) {
+                if ($this->isHttpException($exception) && $exception instanceof HttpExceptionInterface) {
                     return ErrorResource::from([
                         'error' => $exception->getMessage(),
-                        'trace' => $this->app->hasDebugModeEnabled() ? $exception->getTrace() : [],
+                        'exception' => $this->app->hasDebugModeEnabled() ? $exception : null,
                     ])->toResponse($request)
                         ->setStatusCode($exception->getStatusCode());
                 }

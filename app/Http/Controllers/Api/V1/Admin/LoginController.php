@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -20,11 +19,10 @@ class LoginController extends Controller
     #[OA\Response(response: 401, description: 'Unauthorized')]
     #[OA\Response(response: 422, description: 'Unauthorized')]
     #[OA\Response(response: 500, description: 'Internal server error')]
-    public function __invoke(LoginRequest $data, Request $request, LoginService $service): JsonResponse
+    public function __invoke(LoginRequest $data, LoginService $service): JsonResponse
     {
         return SuccessResource::ok(
-            $service->login($data),
-            $request
+            $service->login($data)
         );
     }
 }

@@ -2,30 +2,38 @@
 
 namespace App\Http\Resources\Api\V1;
 
-use Illuminate\Http\Request;
+use Throwable;
 use Spatie\LaravelData\Data;
+use Illuminate\Http\JsonResponse;
+use App\Transformers\TraceableTransformer;
+use App\Transformers\EmptyArrayTransformer;
 use Spatie\LaravelData\Contracts\DataObject;
 use Symfony\Component\HttpFoundation\Response;
+use App\Transformers\ErrorValidationTransformer;
+use Spatie\LaravelData\Attributes\MapOutputName;
+use Spatie\LaravelData\Attributes\WithTransformer;
+use Spatie\LaravelData\Support\Wrapping\WrapExecutionType;
 
 class SuccessResource extends Data
 {
-    /**
-     * @param array<Type> $errors
-     * @param array<Type> $trace
-     */
     public function __construct(
-        public readonly DataObject $data,
         public readonly int $success = 1,
+        #[WithTransformer(EmptyArrayTransformer::class)]
+        public readonly ?DataObject $data = null,
         public readonly string $error = '',
-        public readonly array $errors = [],
-        public readonly array $trace = [],
+        #[WithTransformer(ErrorValidationTransformer::class)]
+        public readonly \Illuminate\Validation\ValidationException|bool $errors = false,
+        #[MapOutputName('trace'),
+            WithTransformer(TraceableTransformer::class)]
+        public readonly Throwable|bool $exception = false,
     ) {
     }
 
-    public static function ok(DataObject $data, Request $request): \Illuminate\Http\JsonResponse|Response
+    public static function ok(DataObject $data): \Illuminate\Http\JsonResponse
     {
-        return static::from([
-            'data' => $data,
-        ])->toResponse($request)->setStatusCode(Response::HTTP_OK);
+        return (new JsonResponse(
+            static::from(['data' => $data])
+                ->transform(wrapExecutionType: WrapExecutionType::Enabled)
+        ))->setStatusCode(Response::HTTP_OK);
     }
 }
