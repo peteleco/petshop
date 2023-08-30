@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Api\V1\Admin;
 
-use OpenApi\Attributes as OA;
 use Spatie\LaravelData\Data;
+use OpenApi\Attributes as OA;
 use Spatie\LaravelData\Attributes\Validation\Email;
 use Spatie\LaravelData\Attributes\Validation\Required;
 
@@ -15,18 +15,30 @@ use Spatie\LaravelData\Attributes\Validation\Required;
             schema: new OA\Schema(
                 required: ['email', 'password'],
                 properties: [
-                    new OA\Property(property: 'email', title: 'Email', description: 'User email', type: 'string', default: 'admin@buckhill.co.uk'),
-                    new OA\Property(property: 'password', title: 'Password', description: 'User password', type: 'string', default: 'admin'),
+                    new OA\Property(
+                        property: 'email',
+                        title: 'Email',
+                        description: 'User email',
+                        type: 'string',
+                        default: 'admin@buckhill.co.uk'
+                    ),
+                    new OA\Property(
+                        property: 'password',
+                        title: 'Password',
+                        description: 'User password',
+                        type: 'string',
+                        default: 'admin'
+                    ),
                 ]
             )
-        )
+        ),
     ]
 )]
 class LoginRequest extends Data
 {
     public function __construct(
-        #[Required,
-            Email]
+        #[Required]
+        #[Email]
         public readonly string $email,
         #[Required]
         public readonly string $password,

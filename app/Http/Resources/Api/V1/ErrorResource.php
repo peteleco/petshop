@@ -19,9 +19,9 @@ class ErrorResource extends Data
         public readonly string $error = 'Something went wrong.',
         #[WithTransformer(ErrorValidationTransformer::class)]
         public readonly \Illuminate\Validation\ValidationException|bool $errors = false,
-        #[MapOutputName('trace'),
-            WithTransformer(TraceableTransformer::class)]
-        public readonly  Throwable|bool $exception = false,
+        #[MapOutputName('trace')]
+        #[WithTransformer(TraceableTransformer::class)]
+        public readonly Throwable|bool $exception = false,
     ) {
     }
 }

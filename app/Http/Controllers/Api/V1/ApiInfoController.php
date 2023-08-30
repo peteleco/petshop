@@ -10,7 +10,14 @@ use App\Http\Resources\Api\V1\ApiInfoResource;
 #[OA\Info(version: 'v1', title: 'Pet Shop API - Swagger Documentation')]
 #[OA\Server(url: 'https://petshop.test/')]
 #[OA\Contact(name: 'Leonardo Carmo', email: 'ldiascarmo@gmail.com')]
-#[OA\SecurityScheme(securityScheme: 'bearerAuth', type: 'http', name: 'bearerAuth', in: 'header', bearerFormat: 'JWT', scheme: 'bearer')]
+#[OA\SecurityScheme(
+    securityScheme: 'bearerAuth',
+    type: 'http',
+    name: 'bearerAuth',
+    in: 'header',
+    bearerFormat: 'JWT',
+    scheme: 'bearer'
+)]
 #[OA\Tag(name:"API Info", description:"Basic information about API")]
 #[OA\Tag(name:"Admin", description:"Admin API Endpoints")]
 class ApiInfoController extends Controller

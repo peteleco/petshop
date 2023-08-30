@@ -23,8 +23,8 @@ class SuccessResource extends Data
         public readonly string $error = '',
         #[WithTransformer(ErrorValidationTransformer::class)]
         public readonly \Illuminate\Validation\ValidationException|bool $errors = false,
-        #[MapOutputName('trace'),
-            WithTransformer(TraceableTransformer::class)]
+        #[MapOutputName('trace')]
+        #[WithTransformer(TraceableTransformer::class)]
         public readonly Throwable|bool $exception = false,
     ) {
     }
