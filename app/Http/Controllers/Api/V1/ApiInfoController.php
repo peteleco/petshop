@@ -15,7 +15,7 @@ use App\Http\Resources\Api\V1\ApiInfoResource;
 #[OA\Tag(name:"Admin", description:"Admin API Endpoints")]
 class ApiInfoController extends Controller
 {
-    #[OA\Get(path: '/api/v1/info',summary: 'API Info', tags: ['API Info'])]
+    #[OA\Get(path: '/api/v1/info', summary: 'API Info', tags: ['API Info'])]
     #[OA\Response(response: 200, description: 'Return the basic info of the api.')]
     public function __invoke(): JsonResponse
     {

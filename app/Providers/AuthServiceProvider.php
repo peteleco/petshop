@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         Auth::extend('jwt', function ($app, $name, array $config) {
             $provider = Auth::createUserProvider($config['provider']);
-            throw_if(!$provider,'ProviderException');
+            throw_if(!$provider, 'ProviderException');
             return new JWTGuard(
                 $provider,
                 $app->make('request'),
