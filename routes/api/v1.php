@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('info', \App\Http\Controllers\Api\V1\ApiInfoController::class)->name('api.v1.info');
 // Admin
 Route::post('admin/login', \App\Http\Controllers\Api\V1\Admin\LoginController::class)->name('api.v1.admin.login');
+Route::post('admin/create', \App\Http\Controllers\Api\V1\Admin\CreateController::class)->name('api.v1.admin.create');
 
 // Routes that must be authenticated
 Route::group([
