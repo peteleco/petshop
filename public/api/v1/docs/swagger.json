@@ -14,6 +14,25 @@
         }
     ],
     "paths": {
+        "/api/v1/admin/login": {
+            "post": {
+                "operationId": "3aed5803feaa634f31046c672c4ea3b9",
+                "responses": {
+                    "200": {
+                        "description": "OK."
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/api/v1/info": {
             "get": {
                 "operationId": "846f965e07f1ecfe392d39c87fc64f17",
