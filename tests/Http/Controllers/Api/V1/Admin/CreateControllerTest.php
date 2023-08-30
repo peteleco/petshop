@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Resources\Api\V1\Admin\CreateResource;
+use App\Models\JwtToken;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,9 +19,11 @@ it('create an admin user', function (User $user) {
     $response->assertStatus(Response::HTTP_CREATED);
     $storedData = CreateResource::from(json_decode($response->getContent())->data);
     // ensure user was created
-    expect(User::filterByUUid($storedData->uuid)->filterByAdmin()->exists())->toBeTrue();
-    //Todo: ensure token is valid
-    // Validates if password is admin
+    expect(User::filterByUUid($storedData->uuid)->filterByAdmin()->exists())
+        ->toBeTrue()
+        ->and(JwtToken::query()
+            ->where('unique_id', $storedData->token)
+            ->exists())->toBeTrue();
 
 })->with([
     'admin inputs' => fn () => User::factory()->make(),

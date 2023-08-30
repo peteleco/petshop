@@ -15,8 +15,8 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 class LoginService
 {
     public function __construct(
-        public UpdateLastLoginAction $updateLastLoginAction,
-        public StoreTokenAction $storeTokenAction
+        protected UpdateLastLoginAction $updateLastLoginAction,
+        protected StoreTokenAction $storeTokenAction
     ) {
     }
 
@@ -38,7 +38,7 @@ class LoginService
         return LoginResource::from(['token' => $token]);
     }
 
-    private function validate(LoginRequest $data): void
+    public function validate(LoginRequest $data): void
     {
         \Auth::validate(['email' => $data->email, 'password' => $data->password]);
     }
@@ -46,7 +46,7 @@ class LoginService
     /**
      * @throws \Throwable
      */
-    private function user(): User
+    public function user(): User
     {
         /** @var ?User $user */
         $user = \Auth::user();
@@ -58,17 +58,17 @@ class LoginService
         return $user;
     }
 
-    private function updateLastLogin(\App\Models\User $admin): void
+    public function updateLastLogin(\App\Models\User $admin): void
     {
         $this->updateLastLoginAction->execute($admin);
     }
 
-    private function storeTokenAction(User $admin, JwtToken $model, UnencryptedToken $token): void
+    public function storeTokenAction(User $admin, JwtToken $model, UnencryptedToken $token): void
     {
         $this->storeTokenAction->execute($admin, $model, $token);
     }
 
-    private function getAuthToken(): UnencryptedToken
+    public function getAuthToken(): UnencryptedToken
     {
         return \Auth::token();
     }
@@ -76,7 +76,7 @@ class LoginService
     /**
      * @throws \Throwable
      */
-    private function validateAdmin(User $admin): void
+    public function validateAdmin(User $admin): void
     {
         throw_if(
             ! $admin->isAdmin(),

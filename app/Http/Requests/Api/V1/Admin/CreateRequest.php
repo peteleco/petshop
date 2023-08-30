@@ -9,6 +9,7 @@ use Spatie\LaravelData\Attributes\Validation\Max;
 use Spatie\LaravelData\Attributes\Validation\Min;
 use Spatie\LaravelData\Attributes\Validation\Same;
 use Spatie\LaravelData\Attributes\Validation\Email;
+use Spatie\LaravelData\Attributes\Validation\Unique;
 use Spatie\LaravelData\Attributes\Validation\Nullable;
 use Spatie\LaravelData\Attributes\Validation\Password;
 use Spatie\LaravelData\Attributes\Validation\BooleanType;
@@ -96,6 +97,7 @@ class CreateRequest extends Data
         public readonly string $last_name,
         #[Max(255)]
         #[Email()]
+        #[Unique(table: 'users', column: 'email')]
         public readonly string $email,
         #[Password(min: 8)]
         #[Max(255)]

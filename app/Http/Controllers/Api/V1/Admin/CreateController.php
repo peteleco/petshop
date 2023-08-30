@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Models\User;
 use OpenApi\Attributes as OA;
-use App\Dtos\Admin\CreateData;
 use Illuminate\Http\JsonResponse;
-use App\Actions\Admin\CreateAction;
 use App\Http\Controllers\Controller;
+use App\Services\Admin\CreateService;
 use App\Http\Resources\Api\V1\SuccessResource;
 use App\Http\Requests\Api\V1\Admin\CreateRequest;
-use App\Http\Resources\Api\V1\Admin\CreateResource;
 
 #[OA\Post(
     path: '/api/v1/admin/create',
@@ -23,10 +20,11 @@ use App\Http\Resources\Api\V1\Admin\CreateResource;
 #[OA\Response(response: 500, description: 'Internal server error')]
 class CreateController extends Controller
 {
-    public function __invoke(CreateRequest $requestData, CreateAction $action): JsonResponse
+    /**
+     * @throws \Throwable
+     */
+    public function __invoke(CreateRequest $requestData, CreateService $service): JsonResponse
     {
-        $action->execute($admin = new User(), CreateData::from($requestData, ['password' => $requestData->password]));
-
-        return SuccessResource::created(data: CreateResource::from($admin));
+        return SuccessResource::created(data: $service->create($requestData));
     }
 }
