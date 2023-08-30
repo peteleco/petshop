@@ -21,6 +21,11 @@ class UserBuilder extends Builder
         return $this->where('is_admin', true);
     }
 
+    public function filterByUUid(string $uuid): static
+    {
+        return $this->where('uuid', $uuid);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection<array-key,\App\Models\User>
      */
