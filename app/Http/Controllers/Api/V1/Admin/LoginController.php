@@ -14,7 +14,12 @@ class LoginController extends Controller
     /**
      * @throws \Throwable
      */
-    #[OA\Post(path: '/api/v1/admin/login')]
+    #[OA\Post(
+        path: '/api/v1/admin/login',
+        summary: 'Login an Admin account',
+        requestBody: new OA\RequestBody(ref: "#/components/requestBodies/".LoginRequest::class),
+        tags: ['Admin']
+    )]
     #[OA\Response(response: 200, description: 'OK.')]
     #[OA\Response(response: 401, description: 'Unauthorized')]
     #[OA\Response(response: 422, description: 'Unauthorized')]

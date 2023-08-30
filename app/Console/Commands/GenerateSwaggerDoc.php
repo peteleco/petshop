@@ -30,7 +30,7 @@ class GenerateSwaggerDoc extends Command
         $sources = config('swagger.sources');
 
         foreach ($sources as $version => $source) {
-            $openapi = \OpenApi\Generator::scan([$source]);
+            $openapi = \OpenApi\Generator::scan($source);
             if ($openapi) {
                 file_put_contents(public_path("api/{$version}/docs/swagger.json"), $openapi->toJson());
                 $this->info("Documentation for api {$version} generated.");

@@ -16,7 +16,14 @@
     "paths": {
         "/api/v1/admin/login": {
             "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Login an Admin account",
                 "operationId": "3aed5803feaa634f31046c672c4ea3b9",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/App\\Http\\Requests\\Api\\V1\\Admin\\LoginRequest"
+                },
                 "responses": {
                     "200": {
                         "description": "OK."
@@ -35,6 +42,10 @@
         },
         "/api/v1/info": {
             "get": {
+                "tags": [
+                    "API Info"
+                ],
+                "summary": "API Info",
                 "operationId": "846f965e07f1ecfe392d39c87fc64f17",
                 "responses": {
                     "200": {
@@ -43,5 +54,70 @@
                 }
             }
         }
-    }
+    },
+    "components": {
+        "requestBodies": {
+            "App\\Http\\Requests\\Api\\V1\\Admin\\LoginRequest": {
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "email",
+                                "password"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "title": "Email",
+                                    "description": "User email",
+                                    "type": "string",
+                                    "default": "admin@buckhill.co.uk"
+                                },
+                                "password": {
+                                    "title": "Password",
+                                    "description": "User password",
+                                    "type": "string",
+                                    "default": "admin"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "title": "Email",
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "title": "Password",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "API Info",
+            "description": "Basic information about API"
+        },
+        {
+            "name": "Admin",
+            "description": "Admin API Endpoints"
+        }
+    ]
 }
