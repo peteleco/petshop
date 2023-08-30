@@ -24,10 +24,10 @@ class LoginController extends Controller
     #[OA\Response(response: 401, description: 'Unauthorized')]
     #[OA\Response(response: 422, description: 'Unauthorized')]
     #[OA\Response(response: 500, description: 'Internal server error')]
-    public function __invoke(LoginRequest $data, LoginService $service): JsonResponse
+    public function __invoke(LoginRequest $requestData, LoginService $service): JsonResponse
     {
         return SuccessResource::ok(
-            $service->login($data)
+            $service->login($requestData)
         );
     }
 }

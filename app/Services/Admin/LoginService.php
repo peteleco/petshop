@@ -40,7 +40,7 @@ class LoginService
 
     private function validate(LoginRequest $data): void
     {
-        \Auth::validate($data->toArray());
+        \Auth::validate(['email' => $data->email, 'password' => $data->password]);
     }
 
     /**
