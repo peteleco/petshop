@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\V1\Admin;
 
+use Spatie\LaravelData\Attributes\Hidden;
 use Spatie\LaravelData\Data;
 use OpenApi\Attributes as OA;
 use Spatie\LaravelData\Attributes\Validation\Email;
@@ -41,6 +42,7 @@ class LoginRequest extends Data
         #[Email]
         public readonly string $email,
         #[Required]
+        #[Hidden]
         public readonly string $password,
     ) {
     }
