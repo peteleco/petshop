@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Transformers\ErrorValidationTransformer;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Attributes\WithTransformer;
-use Spatie\LaravelData\Support\Wrapping\WrapExecutionType;
 
 class SuccessResource extends Data
 {
@@ -33,7 +32,13 @@ class SuccessResource extends Data
     {
         return (new JsonResponse(
             static::from(['data' => $data])
-                ->transform(wrapExecutionType: WrapExecutionType::Enabled)
         ))->setStatusCode(Response::HTTP_OK);
+    }
+
+    public static function created(DataObject $data): JsonResponse
+    {
+        return (new JsonResponse(
+            static::from(['data' => $data])
+        ))->setStatusCode(Response::HTTP_CREATED);
     }
 }

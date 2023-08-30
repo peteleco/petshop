@@ -2,17 +2,16 @@
 
 namespace App\Http\Requests\Api\V1\Admin;
 
-use Spatie\LaravelData\Attributes\Hidden;
-use Spatie\LaravelData\Attributes\Validation\BooleanType;
-use Spatie\LaravelData\Attributes\Validation\Nullable;
 use Spatie\LaravelData\Data;
 use OpenApi\Attributes as OA;
+use Spatie\LaravelData\Attributes\Hidden;
 use Spatie\LaravelData\Attributes\Validation\Max;
 use Spatie\LaravelData\Attributes\Validation\Min;
 use Spatie\LaravelData\Attributes\Validation\Same;
 use Spatie\LaravelData\Attributes\Validation\Email;
-use Spatie\LaravelData\Attributes\Validation\Accepted;
+use Spatie\LaravelData\Attributes\Validation\Nullable;
 use Spatie\LaravelData\Attributes\Validation\Password;
+use Spatie\LaravelData\Attributes\Validation\BooleanType;
 
 #[OA\RequestBody(
     request: CreateRequest::class,
@@ -42,7 +41,7 @@ use Spatie\LaravelData\Attributes\Validation\Password;
                         title: 'Last name',
                         description: 'Last name',
                         type: 'string',
-                        default: 'No'
+                        default: 'My last name'
                     ),
                     new OA\Property(
                         property: 'email',
@@ -54,19 +53,19 @@ use Spatie\LaravelData\Attributes\Validation\Password;
                         property: 'password',
                         description: 'Password',
                         type: 'password',
-                        default: 'admin'
+                        default: 'admin admin'
                     ),
                     new OA\Property(
                         property: 'password_confirmation',
                         description: 'Confirm your password',
                         type: 'password',
-                        default: 'admin'
+                        default: 'admin admin'
                     ),
                     new OA\Property(
                         property: 'address',
                         description: 'Address',
                         type: 'string',
-                        default: 'admin'
+                        default: 'My address'
                     ),
                     new OA\Property(
                         property: 'phone_number',
@@ -78,7 +77,7 @@ use Spatie\LaravelData\Attributes\Validation\Password;
                         property: 'marketing',
                         description: 'Sign newsletter',
                         type: '0|1',
-                        default: '0',
+                        default: '1',
                         nullable: true
                     ),
                 ]
@@ -114,40 +113,4 @@ class CreateRequest extends Data
         public readonly bool $marketing = false,
     ) {
     }
-    //"": {
-    //"type": "string",
-    //"description": "User firstname"
-    //},
-    //"": {
-    //    "type": "string",
-    //"description": "User lastname"
-    //},
-    //"": {
-    //    "type": "string",
-    //"description": "User email"
-    //},
-    //"": {
-    //    "type": "string",
-    //"description": "User password"
-    //},
-    //"": {
-    //    "type": "string",
-    //"description": "User password"
-    //},
-    //"": {
-    //    "type": "string",
-    //"description": "Avatar image UUID"
-    //},
-    //"": {
-    //    "type": "string",
-    //"description": "User main address"
-    //},
-    //"": {
-    //    "type": "string",
-    //"description": "User main phone number"
-    //},
-    //"": {
-    //    "type": "string",
-    //"description": "User marketing preferences"
-    //}
 }
