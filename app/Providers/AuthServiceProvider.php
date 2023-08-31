@@ -33,6 +33,7 @@ class AuthServiceProvider extends ServiceProvider
                     config('jwt.private'),
                     config('jwt.public'),
                     config('jwt.passphrase'),
+                    config('app.url')
                 )
             );
         });

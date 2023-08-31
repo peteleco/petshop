@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Auth\GuardHelpers;
 use Lcobucci\JWT\UnencryptedToken;
@@ -40,14 +41,22 @@ class JWTGuard implements Guard, \App\Contracts\Services\Auth\JWTGuard
         if ($this->user !== null) {
             return $this->user;
         }
-        /*
-        if ($this->jwt->setRequest($this->request)->getToken() &&
-            ($payload = $this->jwt->check(true)) &&
-            $this->validateSubject()
-        ) {
-            return $this->user = $this->provider->retrieveById($payload['sub']);
+
+        $token = $this->jwt->setRequest($this->request)->getToken();
+        if(!$token) {
+            return $this->user = null;
         }
-         */
+        // TODO: get uuid from getAuthIdentifierName
+        $uuid = $token->claims()->get($this->jwt->getAuthIdentifierName());
+        $user = $this->provider->retrieveById($uuid);
+        if($user instanceof User === false) {
+            return $this->user = null;
+        }
+        // Move to builder tokenExists
+        if(!$user->jwtTokens()->where('unique_id', $token->toString())->exists()) {
+            return $this->user = null;
+        }
+        return $this->user = $user;
     }
 
     /**
