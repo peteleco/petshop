@@ -64,6 +64,12 @@
         ],
         "style:fix": [
             "@php ./vendor/bin/pint --dirty"
+        ],
+        "push": [
+            "@style:fix",
+            "@analyse",
+            "@php artisan swagger:generate",
+            "@php artisan test"
         ]
     },
     "extra": {
