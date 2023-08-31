@@ -8,9 +8,8 @@ class AuthorizationHeader
 {
     /**
      * Authorization type
-     * @var string
      */
-    protected string  $type = 'Bearer';
+    protected string $type = 'Bearer';
 
     protected string $headerName = 'Authorization';
 
@@ -18,15 +17,14 @@ class AuthorizationHeader
     {
         $header = $request->headers->get($this->headerName);
         // Invalid header
-        if(!$header) {
+        if (!$header) {
             return null;
         }
         // Invalid type
-        if(!str_contains($header, $this->type)) {
+        if (!str_contains($header, $this->type)) {
             return null;
         }
 
-        return (string)str_replace([$this->type, ' '], '',$header);
+        return (string) str_replace([$this->type, ' '], '', $header);
     }
-
 }

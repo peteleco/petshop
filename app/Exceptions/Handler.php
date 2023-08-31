@@ -5,8 +5,8 @@ namespace App\Exceptions;
 use Illuminate\Http\Request;
 use App\Http\Resources\Api\V1\ErrorResource;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class Handler extends ExceptionHandler
@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
                     ])->toResponse($request)
                         ->setStatusCode($exception->status);
                 }
-                if( $exception instanceof \Illuminate\Auth\AuthenticationException) {
+                if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
                     return ErrorResource::from([
                         'error' => $exception->getMessage(),
                         'exception' => $this->app->hasDebugModeEnabled() ? $exception : null,
