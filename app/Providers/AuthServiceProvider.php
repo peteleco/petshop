@@ -28,12 +28,13 @@ class AuthServiceProvider extends ServiceProvider
             throw_if(!$provider, 'ProviderException');
             return new JWTGuard(
                 $provider,
-                $app->make('request'),
+                $request = $app->make('request'),
                 new JWT(
                     config('jwt.private'),
                     config('jwt.public'),
                     config('jwt.passphrase'),
-                    config('app.url')
+                    config('app.url'),
+                    $request
                 )
             );
         });

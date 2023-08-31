@@ -5,7 +5,6 @@ namespace App\Exceptions;
 use Illuminate\Http\Request;
 use App\Http\Resources\Api\V1\ErrorResource;
 use Illuminate\Contracts\Container\Container;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
@@ -39,27 +38,13 @@ class Handler extends ExceptionHandler
             // Format JSON Response
             if ($request->is('api/*')) {
                 if ($exception instanceof \Illuminate\Validation\ValidationException) {
-                    return ErrorResource::from([
-
-                        'error' => $exception->getMessage(),
-                        'errors' => $exception,
-                        'exception' => $this->app->hasDebugModeEnabled() ? $exception : null,
-                    ])->toResponse($request)
-                        ->setStatusCode($exception->status);
+                    return ErrorResource::fromValidationException($exception, $this->app->hasDebugModeEnabled());
                 }
                 if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
-                    return ErrorResource::from([
-                        'error' => $exception->getMessage(),
-                        'exception' => $this->app->hasDebugModeEnabled() ? $exception : null,
-                    ])->toResponse($request)
-                        ->setStatusCode(Response::HTTP_UNAUTHORIZED);
+                    return ErrorResource::fromAuthenticationException($exception, $this->app->hasDebugModeEnabled());
                 }
                 if ($this->isHttpException($exception) && $exception instanceof HttpExceptionInterface) {
-                    return ErrorResource::from([
-                        'error' => $exception->getMessage(),
-                        'exception' => $this->app->hasDebugModeEnabled() ? $exception : null,
-                    ])->toResponse($request)
-                        ->setStatusCode($exception->getStatusCode());
+                    return ErrorResource::fromHttpException($exception, $this->app->hasDebugModeEnabled());
                 }
             }
         });

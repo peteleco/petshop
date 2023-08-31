@@ -36,6 +36,7 @@ class JWTGuard implements Guard, \App\Contracts\Services\Auth\JWTGuard
     /**
      * @inheritdoc
      * @return \Illuminate\Contracts\Auth\Authenticatable|void|null
+     * @throws \Throwable
      */
     public function user()
     {
@@ -44,11 +45,10 @@ class JWTGuard implements Guard, \App\Contracts\Services\Auth\JWTGuard
             return $this->user;
         }
 
-        $token = $this->jwt->setRequest($this->request)->getToken();
+        $token = $this->jwt->getToken();
         if (! $token) {
             return $this->user = null;
         }
-        // TODO: get uuid from getAuthIdentifierName
 
         $uuid = $this->uuid($token, $this->jwt->getAuthIdentifierName());
         $user = $this->provider->retrieveById($uuid);

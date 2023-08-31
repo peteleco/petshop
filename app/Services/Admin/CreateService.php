@@ -23,8 +23,14 @@ class CreateService
      */
     public function create(CreateRequest $requestData): CreateResource
     {
-        $this->createAction($admin = new User(), CreateData::from($requestData, ['password' => $requestData->password]));
-        $loginResource = $this->login(LoginRequest::from(['email' => $requestData->email, 'password' => $requestData->password]));
+        $this->createAction(
+            $admin = new User(),
+            CreateData::from($requestData, ['password' => $requestData->password])
+        );
+        $loginResource = $this->login(LoginRequest::from([
+            'email' => $requestData->email,
+            'password' => $requestData->password,
+        ]));
 
         return CreateResource::from($admin)->additional(['token' => $loginResource->token]);
     }

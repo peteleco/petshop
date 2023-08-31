@@ -38,20 +38,24 @@ class JWT
      * @param non-empty-string $issuedBy
      * @param non-empty-string $authIdentifierName
      */
-    public function __construct(string $privateKey, string $publicKey, string $passphrase, string $issuedBy, string $authIdentifierName = 'uuid', AuthorizationHeader $header = new AuthorizationHeader())
-    {
+    public function __construct(
+        string $privateKey,
+        string $publicKey,
+        string $passphrase,
+        string $issuedBy,
+        Request $request,
+        string $authIdentifierName = 'uuid',
+        AuthorizationHeader $header = new AuthorizationHeader()
+    ) {
         $this->config = Configuration::forAsymmetricSigner(
             new \Lcobucci\JWT\Signer\Rsa\Sha256(),
             InMemory::file($privateKey, $passphrase),
             InMemory::file($publicKey, $passphrase),
         );
-
+        $this->request = $request;
         $this->token = null;
         $this->header = $header;
         $this->issuedBy = $issuedBy;
-        //        $this->privateKey = $privateKey;
-        //        $this->publicKey = $publicKey;
-        //        $this->passphrase = $passphrase;
         $this->authIdentifierName = $authIdentifierName;
     }
 
@@ -66,12 +70,12 @@ class JWT
             ->getToken($this->config->signer(), $this->config->signingKey());
     }
 
-    public function setRequest(Request $request): static
-    {
-        $this->request = $request;
-
-        return $this;
-    }
+    //    public function setRequest(Request $request): static
+    //    {
+    //        $this->request = $request;
+    //
+    //        return $this;
+    //    }
 
     public function getToken(): ?Token
     {
@@ -82,6 +86,7 @@ class JWT
                 $this->token = null;
             }
         }
+
         return $this->token;
     }
 
@@ -93,7 +98,7 @@ class JWT
     {
         $headerToken = $this->header->token($this->request);
         throw_if(
-            !$headerToken,
+            ! $headerToken,
             UnauthorizedHttpException::class,
             __('Invalid token. #01')
         );
@@ -104,18 +109,11 @@ class JWT
         $this->validateUuid($token, $this->authIdentifierName);
 
         // Expired validation
-        throw_if(
-            $token->isExpired(Carbon::now()),
-            UnauthorizedHttpException::class,
-            __('Invalid token. #03')
-        );
+        $this->validateExpiration($token);
 
         // Issued By validation
-        throw_if(
-            ! $this->config->validator()->validate($token, new IssuedBy($this->issuedBy)),
-            UnauthorizedHttpException::class,
-            __('Invalid token. #04')
-        );
+        $this->validateIssueBy($token, $this->issuedBy);
+
         // Signature validation
         throw_if(
             ! $this->config->validator()->validate(
@@ -146,9 +144,35 @@ class JWT
             __('Invalid token. #02')
         );
         throw_if(
-            !$token->claims()->has($authIdentifierName),
+            ! $token->claims()->has($authIdentifierName),
             UnauthorizedHttpException::class,
             __('Invalid token. #02')
+        );
+    }
+
+    /**
+     * @throws \Throwable
+     */
+    public function validateExpiration(Token $token): void
+    {
+        throw_if(
+            $token->isExpired(Carbon::now()),
+            UnauthorizedHttpException::class,
+            __('Invalid token. #03')
+        );
+    }
+
+    /**
+     * @param non-empty-string $issuedBy
+     *
+     * @throws \Throwable
+     */
+    public function validateIssueBy(Token $token, string $issuedBy): void
+    {
+        throw_if(
+            ! $this->config->validator()->validate($token, new IssuedBy($issuedBy)),
+            UnauthorizedHttpException::class,
+            __('Invalid token. #04')
         );
     }
 }
