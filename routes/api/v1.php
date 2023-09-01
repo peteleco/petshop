@@ -21,7 +21,7 @@ Route::post('admin/create', \App\Http\Controllers\Api\V1\Admin\CreateController:
 // Routes that must be authenticated
 Route::group([
     'prefix' => 'admin',
-    'middleware' => 'auth:api', // 'auth' => \App\Http\Middleware\Authenticate::class,
+    'middleware' => ['auth:api', 'auth.admin'], // 'auth' => \App\Http\Middleware\Authenticate::class,
 ], function (): void {
     Route::get('user-listing', \App\Http\Controllers\Api\V1\Admin\UserListingController::class)
         ->name('api.v1.admin.user_listing');
