@@ -59,10 +59,8 @@ class User extends Authenticatable implements FillableData
     }
 
     /**
-     *
-     * @param \Illuminate\Database\Query\Builder $query
-     *
      * @return \App\Builders\UserBuilder<\App\Models\User>
+     * @inheritdoc
      */
     public function newEloquentBuilder($query): UserBuilder
     {

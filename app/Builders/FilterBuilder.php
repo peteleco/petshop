@@ -16,8 +16,6 @@ use App\Contracts\Http\Requests\FilterRequestObject;
 abstract class FilterBuilder extends Builder implements Filterable
 {
     /**
-     * @param \App\Contracts\Http\Requests\FilterRequestObject $filters
-     *
      * @return \App\Builders\FilterBuilder<TModelClass>
      */
     public function filterBy(FilterRequestObject $filters): self
@@ -40,9 +38,6 @@ abstract class FilterBuilder extends Builder implements Filterable
     }
 
     /**
-     * @param string $attribute
-     * @param bool $desc
-     *
      * @return \App\Builders\FilterBuilder<TModelClass>
      */
     public function sortBy(string $attribute, bool $desc = false): self

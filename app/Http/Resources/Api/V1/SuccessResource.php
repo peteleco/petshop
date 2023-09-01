@@ -34,7 +34,6 @@ class SuccessResource extends Data
      * @template TValue
      *
      * @param \Spatie\LaravelData\Contracts\DataObject|\Spatie\LaravelData\Contracts\DataCollectable<TKey, TValue> $data
-     *
      */
     public static function ok(DataObject|DataCollectable $data): \Illuminate\Http\JsonResponse
     {

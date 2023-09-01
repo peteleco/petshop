@@ -49,8 +49,6 @@ class UserBuilder extends FilterBuilder
     }
 
     /**
-     * @param \Carbon\Carbon $createdAt
-     *
      * @return \App\Builders\UserBuilder<TModelClass>
      */
     public function filterByCreatedAt(Carbon $createdAt): self
