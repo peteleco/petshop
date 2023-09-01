@@ -10,18 +10,17 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Contracts\Http\Requests\FilterRequestObject;
 
 /**
- * @extends Builder<\Illuminate\Database\Eloquent\Model>
+ * @template TModelClass of \Illuminate\Database\Eloquent\Model
+ * @extends Builder<TModelClass>
  */
 abstract class FilterBuilder extends Builder implements Filterable
 {
     /**
-     * findBy: find by specific value
-     * filterBy: filter by value
-     * search..By: search something and return collection
+     * @param \App\Contracts\Http\Requests\FilterRequestObject $filters
      *
-     * @return $this
+     * @return \App\Builders\FilterBuilder<TModelClass>
      */
-    public function filterBy(FilterRequestObject $filters): static
+    public function filterBy(FilterRequestObject $filters): self
     {
         $reflect = new ReflectionClass($filters);
         $attributes = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
@@ -34,18 +33,28 @@ abstract class FilterBuilder extends Builder implements Filterable
             }
         }
         if ($filters->sortBy() !== null) {
-            $this->sortBy($filters->sortBy(), $filters->desc());
+            return $this->sortBy($filters->sortBy(), $filters->desc());
         }
 
         return $this;
     }
 
-    public function sortBy(string $attribute, bool $desc = false): static
+    /**
+     * @param string $attribute
+     * @param bool $desc
+     *
+     * @return \App\Builders\FilterBuilder<TModelClass>
+     */
+    public function sortBy(string $attribute, bool $desc = false): self
     {
         if ($desc) {
-            return $this->orderByDesc($attribute);
+            $this->orderByDesc($attribute);
+
+            return $this;
         }
 
-        return $this->orderBy($attribute);
+        $this->orderBy($attribute);
+
+        return $this;
     }
 }

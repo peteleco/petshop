@@ -6,78 +6,131 @@ use Carbon\Carbon;
 
 /**
  * @template TModelClass of \App\Models\User
- *
- * @extends FilterBuilder<\App\Models\User>
+ * @extends \App\Builders\FilterBuilder<TModelClass>
  */
 class UserBuilder extends FilterBuilder
 {
-    public function filterByFirstName(string $firstName): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function filterByFirstName(string $firstName): self
     {
-        return $this->where('first_name', 'like', '%' . $firstName . '%');
+        $this->where('first_name', 'like', '%' . $firstName . '%');
+
+        return $this;
     }
 
-    public function filterByPhoneNumber(string $phone): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function filterByPhoneNumber(string $phone): self
     {
-        return $this->where('phone_number', 'like', '%' . $phone . '%');
+        $this->where('phone_number', 'like', '%' . $phone . '%');
+
+        return $this;
     }
 
-    public function filterByAddress(string $address): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function filterByAddress(string $address): self
     {
-        return $this->where('address', 'like', '%' . $address . '%');
+        $this->where('address', 'like', '%' . $address . '%');
+
+        return $this;
     }
 
-    public function filterByMarketing(bool $marketing): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function filterByMarketing(bool $marketing): self
     {
         return $this->where('is_marketing', $marketing);
     }
 
-    public function filterByCreatedAt(Carbon $createdAt): static
+    /**
+     * @param \Carbon\Carbon $createdAt
+     *
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function filterByCreatedAt(Carbon $createdAt): self
     {
-        return $this->whereBetween('created_at', [
+        $this->whereBetween('created_at', [
             $createdAt->copy()->startOfDay(),
             $createdAt->copy()->endOfDay(),
         ]);
+
+        return $this;
     }
 
-    public function filterByEmail(string $email): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function filterByEmail(string $email): self
     {
-        return $this->where('email', 'like', '%' . $email . '%');
+        $this->where('email', 'like', '%' . $email . '%');
+
+        return $this;
     }
 
-    public function findByEmail(string $email): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function findByEmail(string $email): self
     {
-        return $this->where('email', $email);
+        $this->where('email', $email);
+
+        return $this;
     }
 
-    public function filterByAdmin(): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function filterByAdmin(): self
     {
-        return $this->where('is_admin', true);
+        $this->where('is_admin', true);
+
+        return $this;
     }
 
-    public function filterByNotAdmin(): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function filterByNotAdmin(): self
     {
-        return $this->where('is_admin', false);
+        $this->where('is_admin', false);
+
+        return $this;
     }
 
-    public function findByUUid(string $uuid): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function findByUUid(string $uuid): self
     {
-        return $this->where('uuid', $uuid);
+        $this->where('uuid', $uuid);
+
+        return $this;
     }
 
-    public function filterByUUid(string $uuid): static
+    /**
+     * @return \App\Builders\UserBuilder<TModelClass>
+     */
+    public function filterByUUid(string $uuid): self
     {
         return $this->findByUUid($uuid);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection<array-key,\App\Models\User>
+     * @return \Illuminate\Database\Eloquent\Collection<array-key,TModelClass>
      */
     public function searchByEmail(string $email): \Illuminate\Database\Eloquent\Collection
     {
         return $this->findByEmail($email)->get();
     }
+
     /**
-     * @return \Illuminate\Database\Eloquent\Collection<array-key,\App\Models\User>
+     * @return \Illuminate\Database\Eloquent\Collection<array-key,TModelClass>
      */
     public function searchAdminByEmail(string $email): \Illuminate\Database\Eloquent\Collection
     {

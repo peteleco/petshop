@@ -29,6 +29,13 @@ class SuccessResource extends Data
     ) {
     }
 
+    /**
+     * @template TKey of array-key
+     * @template TValue
+     *
+     * @param \Spatie\LaravelData\Contracts\DataObject|\Spatie\LaravelData\Contracts\DataCollectable<TKey, TValue> $data
+     *
+     */
     public static function ok(DataObject|DataCollectable $data): \Illuminate\Http\JsonResponse
     {
         if ($data instanceof DataCollectable) {
