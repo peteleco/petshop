@@ -19,7 +19,7 @@ it('create an admin user', function (User $user) {
     $response->assertStatus(Response::HTTP_CREATED);
     $storedData = CreateResource::from(json_decode($response->getContent())->data);
     // ensure user was created
-    expect(User::filterByUUid($storedData->uuid)->filterByAdmin()->exists())
+    expect(User::findByUUid($storedData->uuid)->filterByAdmin()->exists())
         ->toBeTrue()
         ->and(JwtToken::query()
             ->where('unique_id', $storedData->token)

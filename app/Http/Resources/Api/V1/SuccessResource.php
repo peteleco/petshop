@@ -11,6 +11,7 @@ use Spatie\LaravelData\Contracts\DataObject;
 use Symfony\Component\HttpFoundation\Response;
 use App\Transformers\ErrorValidationTransformer;
 use Spatie\LaravelData\Attributes\MapOutputName;
+use Spatie\LaravelData\Contracts\DataCollectable;
 use Spatie\LaravelData\Attributes\WithTransformer;
 
 class SuccessResource extends Data
@@ -28,8 +29,11 @@ class SuccessResource extends Data
     ) {
     }
 
-    public static function ok(DataObject $data): \Illuminate\Http\JsonResponse
+    public static function ok(DataObject|DataCollectable $data): \Illuminate\Http\JsonResponse
     {
+        if ($data instanceof DataCollectable) {
+            return (new JsonResponse($data))->setStatusCode(Response::HTTP_OK);
+        }
         return (new JsonResponse(
             static::from(['data' => $data])
         ))->setStatusCode(Response::HTTP_OK);

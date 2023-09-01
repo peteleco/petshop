@@ -23,6 +23,6 @@ Route::group([
     'prefix' => 'admin',
     'middleware' => ['auth:api', 'auth.admin'], // 'auth' => \App\Http\Middleware\Authenticate::class,
 ], function (): void {
-    Route::get('user-listing', \App\Http\Controllers\Api\V1\Admin\UserListingController::class)
+    Route::get('user-listing', \App\Http\Controllers\Api\V1\Admin\UserListController::class)
         ->name('api.v1.admin.user_listing');
 });
