@@ -18,4 +18,18 @@ it('list all non admin users', function () {
     expect($totalAdminUsers + $totalOfNonAdminUsers)->toBe($totalUsers);
 });
 
+it('ensure uses user list request on controller', function () {
+    $this->assertInvokedControllerUsesDataObjectOnRequest(
+        \App\Http\Controllers\Api\V1\Admin\UserListController::class,
+        \App\Http\Requests\Api\V1\Admin\UserListRequest::class
+    );
+});
+
+it('ensure uses pagination request on controller', function () {
+    $this->assertInvokedControllerUsesDataObjectOnRequest(
+        \App\Http\Controllers\Api\V1\Admin\UserListController::class,
+        \App\Http\Requests\Api\V1\PaginateRequest::class
+    );
+});
+
 
