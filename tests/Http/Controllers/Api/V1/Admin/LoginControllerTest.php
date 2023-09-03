@@ -42,3 +42,9 @@ it('fails to login', function (string $email, string $password, int $statusCode)
         'statusCode' => Response::HTTP_UNAUTHORIZED,
     ],
 ]);
+it('ensure uses login request on controller', function () {
+    $this->assertInvokedControllerUsesDataObjectOnRequest(
+        \App\Http\Controllers\Api\V1\Admin\LoginController::class,
+        \App\Http\Requests\Api\V1\Admin\LoginRequest::class
+    );
+});
