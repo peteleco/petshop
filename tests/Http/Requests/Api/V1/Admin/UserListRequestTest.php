@@ -22,7 +22,7 @@ it('verifies validation rules', function () {
     $this->assertExactValidationRules([
 
         'first_name' => ['string', 'nullable', 'max:255'],
-        'email' => ['string', 'nullable', 'email:rfc'],
+        'email' => ['string', 'nullable', 'max:255'],
         'phone' => ['string', 'nullable', 'max:255'],
         'address' => ['string', 'nullable', 'max:255'],
         'created_at' => ['nullable', 'date_format:Y-m-d'],

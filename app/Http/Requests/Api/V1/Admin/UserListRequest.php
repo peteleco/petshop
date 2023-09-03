@@ -8,7 +8,6 @@ use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Attributes\MapOutputName;
 use Spatie\LaravelData\Attributes\Validation\In;
 use Spatie\LaravelData\Attributes\Validation\Max;
-use Spatie\LaravelData\Attributes\Validation\Email;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Attributes\Validation\Nullable;
 use Spatie\LaravelData\Attributes\Validation\DateFormat;
@@ -21,7 +20,7 @@ class UserListRequest extends FilterRequest
         #[Max(255)]
         public readonly string|null $first_name = null,
         #[Nullable]
-        #[Email]
+        #[Max(255)]
         public readonly string|null $email = null,
         #[Nullable]
         #[Max(255)]
