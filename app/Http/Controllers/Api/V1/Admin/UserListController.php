@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use OpenApi\Attributes as OA;
 use App\Models\User;
+use OpenApi\Attributes as OA;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\Api\V1\PaginateRequest;
 use App\Http\Resources\Api\V1\SuccessResource;
