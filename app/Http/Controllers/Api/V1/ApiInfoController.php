@@ -13,9 +13,7 @@ use App\Http\Resources\Api\V1\ApiInfoResource;
 #[OA\SecurityScheme(
     securityScheme: 'bearerAuth',
     type: 'http',
-    name: 'bearerAuth',
     in: 'header',
-    bearerFormat: 'JWT',
     scheme: 'bearer'
 )]
 #[OA\Tag(name:"API Info", description:"Basic information about API")]

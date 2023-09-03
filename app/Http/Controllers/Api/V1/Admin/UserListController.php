@@ -15,7 +15,7 @@ class UserListController
     #[OA\Get(
         path: '/api/v1/admin/user-listing',
         summary: 'List non admin users',
-        security: ["bearerAuth"],
+        security: [['bearerAuth' => []]],
         tags: ['Admin'],
         parameters: [
             new OA\Parameter(
