@@ -11,12 +11,15 @@
 |
 */
 
+
 uses(
     Tests\TestCase::class,
     Illuminate\Foundation\Testing\RefreshDatabase::class,
-)
-    ->beforeEach(fn () => $this->seed(\Database\Seeders\DatabaseSeeder::class))
+)->beforeEach(fn () => $this->seed(\Database\Seeders\DatabaseSeeder::class))
     ->in('Feature', 'Http');
+uses(\JMac\Testing\Traits\AdditionalAssertions::class)
+    ->in('Http', 'Unit');
+
 
 /*
 |--------------------------------------------------------------------------
