@@ -17,9 +17,9 @@ jobs:
             CACHE_DRIVER: redis
             QUEUE_CONNECTION: redis
             SESSION_DRIVER: redis
-            JWT_PRIVATE_KEY=${{ github.workspace }}/jwt_keys/test_private_001.pem
-            JWT_PUBLIC_KEY=${{ github.workspace }}/jwt_keys/test_public_01.pem
-            JWT_PASSPHRASE=petshop
+            JWT_PRIVATE_KEY: ${{ github.workspace }}/jwt_keys/test_private_001.pem
+            JWT_PUBLIC_KEY: ${{ github.workspace }}/jwt_keys/test_public_01.pem
+            JWT_PASSPHRASE: petshop
 
             # Docs: https://docs.github.com/en/actions/using-containerized-services
         services:
