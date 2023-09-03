@@ -28,3 +28,10 @@ it('create an admin user', function (User $user) {
 })->with([
     'admin inputs' => fn () => User::factory()->make(),
 ]);
+
+it('ensure uses create request on controller', function () {
+    $this->assertInvokedControllerUsesDataObjectOnRequest(
+        \App\Http\Controllers\Api\V1\Admin\CreateController::class,
+        \App\Http\Requests\Api\V1\Admin\CreateRequest::class
+    );
+});
