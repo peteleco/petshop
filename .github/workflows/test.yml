@@ -10,6 +10,7 @@ jobs:
         name: PetShop (PHP ${{ matrix.php-versions }})
         runs-on: ubuntu-latest
         env:
+            APP_NAME: "PetShop API"
             DB_DATABASE: petshop
             DB_USERNAME: root
             DB_PASSWORD: password
