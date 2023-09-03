@@ -20,3 +20,4 @@ yarn-error.log
 private_key.pem
 public_key.pem
 jwt_keys
+_ide_helper.php
