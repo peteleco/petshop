@@ -26,7 +26,8 @@
         "pestphp/pest": "^2.16",
         "pestphp/pest-plugin-laravel": "^2.2",
         "phpunit/phpunit": "^10.3.2",
-        "spatie/laravel-ignition": "^2.3"
+        "spatie/laravel-ignition": "^2.3",
+        "peteleco/notifier": "dev-main"
     },
     "autoload": {
         "psr-4": {
@@ -91,6 +92,12 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/peteleco/notifier"
+        }
+    ],
     "minimum-stability": "stable",
     "prefer-stable": true
 }
