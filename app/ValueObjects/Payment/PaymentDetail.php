@@ -4,26 +4,30 @@ namespace App\ValueObjects\Payment;
 
 use Carbon\Carbon;
 use ReflectionClass;
+use ReflectionType;
 use Spatie\LaravelData\Data;
-use Spatie\TypeScriptTransformer\Transformers\DtoTransformer;
-use Spatie\TypeScriptTransformer\TypeScriptTransformerConfig;
 
 abstract class PaymentDetail extends Data
 {
-    public static function jsonSchema():string
+    /**
+     * @throws \Throwable
+     */
+    public static function jsonSchema(): string
     {
         $reflection = new ReflectionClass(static::class);
         /** @var array-key $schema*/
         $schema = [];
-        foreach ($reflection->getConstructor()->getParameters() as $parameter) {
-            $schema[$parameter->getName()] = static::transformToStringType($parameter->getType()->getName());
+        $constructor = $reflection->getConstructor();
+        throw_if(!$constructor, \Exception::class, __('Class without constructor.'));
+        foreach ($constructor->getParameters() as $parameter) {
+            $schema[$parameter->getName()] = static::parseType($parameter->getType());
         }
 
-        return json_encode($schema);
+        return (string) json_encode($schema);
     }
-    private static function transformToStringType(string $type): string
+    protected static function parseType(?ReflectionType $type): string
     {
-        if(in_array($type,[Carbon::class, \DateTimeInterface::class])) {
+        if(!$type || in_array($type, [Carbon::class, \DateTimeInterface::class])) {
             return 'string';
         }
         return $type;
