@@ -1,4 +1,5 @@
 ## PetShop Coding Test
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/peteleco/petshop/test.yml?branch=main&label=tests&style=flat-square)](https://github.com/peteleco/petshop/actions?query=workflow%3Atests+branch%3Amain)
 
 ## Setup
 This application requires PHP, MySql, Nginx or Apache  to run.
@@ -38,13 +39,15 @@ openssl rsa -in private_01.pem -out private_001.pem
   - Route with swagger endpoints
   
 ## Implementations
-#### Middlewares
+### Notifier Package 
+The notifier package is installed you can see the integration working through the test
+### Middlewares
 two middleware were created
 - EnforceJson, to avoid error when you forgot to set "accept" json header
 - EnsureUserAdmin, to protect routes that only admin should access
-#### Data Objects
+### Data Objects
 This app is using DataObjects instead of laravel Request/Resource this way is easier to use static types.  
-#### Filter Builder
+### Filter Builder
 - filterBy{property} means its filter by any condition
 - findBy{property} means its finding by a specific condition
 - search prefix means will return an collection
@@ -77,6 +80,12 @@ This app is using DataObjects instead of laravel Request/Resource this way is ea
     }
 ```
 
+### Testing
+
+I'm using PEST PHP to test, and with you want to see all tests performing without running locally just check the [GitHub actions page](https://github.com/peteleco/petshop/actions).
+````shell
+artisan test
+````
 
 ### Commands
 
@@ -120,3 +129,6 @@ composer style:fix
 - [JSON Web Token](https://github.com/lcobucci/jwt)
 - [Laravel Test Assertions](https://github.com/jasonmccreary/laravel-test-assertions)
 - [Laravel IDE Helper](https://github.com/barryvdh/laravel-ide-helper)
+- [Notification service](https://github.com/peteleco/notifier)
+-  [Pest Plugin Snapshots](https://github.com/spatie/pest-plugin-snapshots)
+-  [PHP UNIT Snapshot](https://github.com/spatie/phpunit-snapshot-assertions)
