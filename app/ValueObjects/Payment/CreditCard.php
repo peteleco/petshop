@@ -10,7 +10,7 @@ class CreditCard extends PaymentDetail
         public readonly string $holder_name,
         public readonly string $number,
         public readonly int $ccv,
-        public readonly \DateTimeInterface $expire_date
+        public readonly Carbon $expire_date
     )
     {
     }
