@@ -3,8 +3,8 @@
 namespace App\ValueObjects\Payment;
 
 use Carbon\Carbon;
-use ReflectionClass;
 use ReflectionType;
+use ReflectionClass;
 use Spatie\LaravelData\Data;
 
 abstract class PaymentDetail extends Data
@@ -27,7 +27,7 @@ abstract class PaymentDetail extends Data
     }
     protected static function parseType(?ReflectionType $type): string
     {
-        if(!$type || in_array($type, [Carbon::class, \DateTimeInterface::class])) {
+        if (!$type || in_array($type, [Carbon::class, \DateTimeInterface::class])) {
             return 'string';
         }
         return $type;

@@ -11,7 +11,6 @@ class CreditCard extends PaymentDetail
         public readonly string $number,
         public readonly int $ccv,
         public readonly Carbon $expire_date
-    )
-    {
+    ) {
     }
 }

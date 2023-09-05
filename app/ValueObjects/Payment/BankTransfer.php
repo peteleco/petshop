@@ -2,8 +2,6 @@
 
 namespace App\ValueObjects\Payment;
 
-use App\ValueObjects\Payment\PaymentDetail;
-
 class BankTransfer extends PaymentDetail
 {
     public function __construct(
