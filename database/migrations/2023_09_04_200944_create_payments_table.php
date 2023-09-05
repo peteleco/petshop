@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->uuid()->index();
-            $table->string('type')->index();
+            $table->string('type')->unique();
             $table->json('details');
             $table->timestamps();
         });
