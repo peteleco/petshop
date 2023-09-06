@@ -24,3 +24,4 @@ jwt_keys/*
 !jwt_keys/test_private_001.pem
 !jwt_keys/test_public_01.pem
 _ide_helper.php
+supervisord.pid
