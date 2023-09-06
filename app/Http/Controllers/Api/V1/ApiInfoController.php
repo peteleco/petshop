@@ -9,6 +9,7 @@ use App\Http\Resources\Api\V1\ApiInfoResource;
 
 #[OA\Info(version: 'v1', title: 'Pet Shop API - Swagger Documentation')]
 #[OA\Server(url: 'https://petshop.test/')]
+#[OA\Server(url: 'http://localhost:8888/')]
 #[OA\Contact(name: 'Leonardo Carmo', email: 'ldiascarmo@gmail.com')]
 #[OA\SecurityScheme(
     securityScheme: 'bearerAuth',
