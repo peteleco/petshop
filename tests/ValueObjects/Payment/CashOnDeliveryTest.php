@@ -2,6 +2,6 @@
 
 use App\ValueObjects\Payment\CashOnDelivery;
 
-it('transform to json schema', function (){
+it('transform to json schema', function () {
     expect(CashOnDelivery::jsonSchema())->toMatchSnapshot();
 });

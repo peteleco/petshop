@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,8 +19,8 @@ return new class extends Migration {
             $table->uuid()->index();
             $table->json('products');
             $table->string('address');
-            $table->float('delivery_fee', 8,2)->nullable();
-            $table->float('amount',12,2);
+            $table->float('delivery_fee', 8, 2)->nullable();
+            $table->float('amount', 12, 2);
             $table->timestamp('shipped_at')->nullable();
 
             $table->timestamps();

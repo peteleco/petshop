@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
+
 use function Pest\Laravel\{getJson,actingAs};
 
 it('list all non admin users', function () {
@@ -9,7 +10,7 @@ it('list all non admin users', function () {
     $totalAdminUsers = User::query()->filterByAdmin()->count();
     $totalUsers = User::query()->count();
     $admin = User::factory()->admin()->create();
-    $response = actingAs($admin,'api')->getJson(route('api.v1.admin.user_listing'));
+    $response = actingAs($admin, 'api')->getJson(route('api.v1.admin.user_listing'));
     $response->assertStatus(Response::HTTP_OK)->assertJsonStructure([
         'data',
         'links',
@@ -31,5 +32,3 @@ it('ensure uses pagination request on controller', function () {
         \App\Http\Requests\Api\V1\PaginateRequest::class
     );
 });
-
-
