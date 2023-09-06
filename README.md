@@ -15,6 +15,8 @@ Welcome to the PetShop Coding Test repository. This project serves as a PHP deve
   - Route with swagger endpoints
 
 ## Implementations
+### JWT Authentication
+The api authentication was implemented using the package https://github.com/lcobucci/jwt.
 ### Containers
 - For this project was used docker-compose
 - For the notifier package just docker
